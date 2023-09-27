@@ -42,6 +42,10 @@ function initGame() {
     playerElement0.classList.add('player--active');
     playerElement1.classList.remove('player--active');
   }
+  playerElement0.classList.remove('player--winner');
+  playerElement1.classList.remove('player--winner');
+  activePlayer0.textContent = 'ACTIVE';
+  activePlayer1.textContent = 'ACTIVE';
   currentScoreElement0.textContent = 0;
   currentScoreElement1.textContent = 0;
   scoreElement0.textContent = 0;
@@ -68,13 +72,19 @@ function switchPlayer(isHold) {
     currentScoreElement0.textContent = currentScore0;
     console.log(isHold, currentScore0, score0);
     isAfterReset0 = !isHold;
-    if(score0 >= maxScore){
+    if(score0 >= 20){
+      playerElement0.classList.add('player--winner');
+      activePlayer0.textContent = 'WINNER';
       Swal.fire({
         title: 'Player 1 Wins',
         confirmButtonText: 'OK',
+        showCancelButton: true,
         icon : 'success'
+      }).then(respose =>{
+        if(respose.isConfirmed){
+          initGame();
+        }
       });
-      initGame();
     }
   } else if (playerElement1.classList.contains('player--active')) {
     activePlayer0.classList.remove('hidden');
@@ -91,13 +101,20 @@ function switchPlayer(isHold) {
     currentScoreElement1.textContent = currentScore1;
     console.log(isHold, currentScore1, score1);
     isAfterReset1 = !isHold;
-    if(score1 >= maxScore){
+    if(score1 >= 20){
+      activePlayer1.textContent = 'WINNER';
+      playerElement1.classList.add('player--winner');
       Swal.fire({
         title: 'Player 2 Wins',
         confirmButtonText: 'OK',
+        showCancelButton: true,
         icon : 'success'
+      }).then(respose =>{
+        if(respose.isConfirmed){
+          initGame();
+        }
       });
-      initGame();
+      
     }
   }
 }
