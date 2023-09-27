@@ -127,6 +127,19 @@ main {
 }
 
 /* ABSOLUTE POSITIONED ELEMENTS */
+/* .crown-tag{
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+.crown-tag img{
+  width: 5rem;
+  margin-top: 2rem;
+  margin-left: 15rem;
+  position: absolute;
+} */
+
 .btn {
   position: absolute;
   left: 50%;
