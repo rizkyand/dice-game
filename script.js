@@ -22,6 +22,7 @@ const btnNew = document.querySelector('.btn--new');
 const btnHold = document.querySelector('.btn--hold');
 
 //initiate
+const maxScore = 100;
 let currentScore0 = 0;
 let score0 = 0;
 let currentScore1 = 0;
@@ -67,6 +68,14 @@ function switchPlayer(isHold) {
     currentScoreElement0.textContent = currentScore0;
     console.log(isHold, currentScore0, score0);
     isAfterReset0 = !isHold;
+    if(score0 >= maxScore){
+      Swal.fire({
+        title: 'Player 1 Wins',
+        confirmButtonText: 'OK',
+        icon : 'success'
+      });
+      initGame();
+    }
   } else if (playerElement1.classList.contains('player--active')) {
     activePlayer0.classList.remove('hidden');
     activePlayer1.classList.add('hidden');
@@ -82,6 +91,14 @@ function switchPlayer(isHold) {
     currentScoreElement1.textContent = currentScore1;
     console.log(isHold, currentScore1, score1);
     isAfterReset1 = !isHold;
+    if(score1 >= maxScore){
+      Swal.fire({
+        title: 'Player 2 Wins',
+        confirmButtonText: 'OK',
+        icon : 'success'
+      });
+      initGame();
+    }
   }
 }
 
@@ -108,4 +125,7 @@ btnHold.addEventListener('click', function () {
   switchPlayer(true);
 });
 
+
+//handling new game button
 btnNew.addEventListener('click', initGame);
+
